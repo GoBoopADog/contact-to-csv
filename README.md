@@ -36,9 +36,9 @@ Just run `wrangler dev` and do the same as above
 
 ## Notes
 <details>
-<summary>Hello</summary>
+<summary>Hello!</summary>
 
-> [!NOTE]
-> I am quite silly! Some things could be done better (mainly the naming between the form and the db & general organization) but as long as it all works :) <br>
-> I also don't know what some of the typescript files do but I'm too scared to touch them so there they shall remain
+I am quite silly! Some things could be done better (mainly the naming between the form and the db & general organization) but as long as it all works :)
+<br>
+I also don't know what some of the typescript files do but I'm too scared to touch them so there they shall remain
 </details>
