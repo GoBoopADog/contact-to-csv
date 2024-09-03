@@ -12,8 +12,18 @@ CREATE TABLE submissions (
   id integer PRIMARY KEY AUTOINCREMENT, 
   first_name text NOT NULL,
   last_name text NOT NULL, 
-  email text NOT NULL
+  email text NOT NULL,
+  phoneNumber text NOT NULL,
+  dateOfBirth text NOT NULL,
+  cardCount integer NOT NULL
 );
+```
+
+(If updating from a previous version, you'll want to run the following in the console)
+```sql
+ALTER TABLE submissions ADD phoneNumber text DEFAULT '' NOT NULL;
+ALTER TABLE submissions ADD dateOfBirth text DEFAULT '' NOT NULL;
+ALTER TABLE submissions ADD cardCount integer DEFAULT -1 NOT NULL;
 ```
 
 <details open>
