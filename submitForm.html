@@ -6,14 +6,12 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>YEAH!</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
 </head>
 
 <body>
     <h1>YEAH!</h1>
 
-    <form action="http://127.0.0.1:8787/submit" method="post">
+    <form action="http://127.0.0.1:8787/submit" method="post" id="theForm">
         <div>
             <label for="firstName">First Name</label>
             <input type="text" name="firstName" id="firstName" value="Joe">
@@ -58,6 +56,27 @@
 
         <button type="submit">YEAH! BUTTON!</button>
     </form>
+
+    <br>
+    <br>
+    <button type="button" onclick="fileTestChanges()">Change first name field to a file upload</button>
+    <br>
+    <button type="button" onclick="textInCardChanges()">Change card count field to text</button>
+
+    <script>
+        function fileTestChanges() {
+            const theForm = document.getElementById('theForm');
+            const firstNameInput = document.getElementById('firstName');
+
+            theForm.setAttribute('enctype', 'multipart/form-data');
+            firstNameInput.setAttribute('type', 'file');
+        }
+
+        function textInCardChanges() {
+            const cardCountField = document.getElementById('cardCount');
+            cardCountField.setAttribute('type', 'text');
+        }
+    </script>
 </body>
 
 </html>

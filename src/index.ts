@@ -61,11 +61,13 @@ export default {
                         status: 400,
                     });
                 }
+
+                const cardCountNum = parseInt(cardCount) || -1;
                 // the sadness takes over
                 //#endregion
 
                 await env.DB.prepare("INSERT INTO submissions (first_name, last_name, email, phoneNumber, dateOfBirth, cardCount) VALUES (?, ?, ?, ?, ?, ?)")
-                    .bind(firstName.trim(), lastName.trim(), email.trim(), phoneNumber.trim(), dateOfBirth.trim(), Number.parseInt(cardCount.trim()))
+                    .bind(firstName.trim(), lastName.trim(), email.trim(), phoneNumber.trim(), dateOfBirth.trim(), cardCountNum)
                     .all();
 
                 return Response.redirect(`${env.REDIRECT_URL}?registered=true`);
