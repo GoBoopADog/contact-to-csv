@@ -20,7 +20,7 @@ export default {
                 const email = formData.get('email');
                 const phoneNumber = formData.get('phone');
                 const dateOfBirth = formData.get('dob');
-                const cardCount = parseInt(formData.get('cardCount') || '-1');
+                const cardCount = formData.get('cardCount');
 
                 //#region Validation! :D
                 if (typeof firstName !== 'string' || firstName.length < 1 || firstName.length > 100) {
@@ -56,16 +56,18 @@ export default {
                     });
                 }
 
-                if (isNaN(cardCount)) {
+                if (typeof cardCount !== 'string') {
                     return new Response('Card count is malformed!', {
                         status: 400,
                     });
                 }
+
+                const cardCountNum = parseInt(cardCount) || -1;
                 // the sadness takes over
                 //#endregion
 
                 await env.DB.prepare("INSERT INTO submissions (first_name, last_name, email, phoneNumber, dateOfBirth, cardCount) VALUES (?, ?, ?, ?, ?, ?)")
-                    .bind(firstName.trim(), lastName.trim(), email.trim(), phoneNumber.trim(), dateOfBirth.trim(), cardCount)
+                    .bind(firstName.trim(), lastName.trim(), email.trim(), phoneNumber.trim(), dateOfBirth.trim(), cardCountNum)
                     .all();
 
                 return Response.redirect(`${env.REDIRECT_URL}?registered=true`);
