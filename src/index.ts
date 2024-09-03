@@ -20,7 +20,7 @@ export default {
                 const email = formData.get('email');
                 const phoneNumber = formData.get('phone');
                 const dateOfBirth = formData.get('dob');
-                const cardCount = formData.get('cardCount');
+                const cardCount = parseInt(formData.get('cardCount') || '-1');
 
                 //#region Validation! :D
                 if (typeof firstName !== 'string' || firstName.length < 1 || firstName.length > 100) {
@@ -56,7 +56,7 @@ export default {
                     });
                 }
 
-                if (typeof cardCount !== 'string') {
+                if (isNaN(cardCount)) {
                     return new Response('Card count is malformed!', {
                         status: 400,
                     });
@@ -65,7 +65,7 @@ export default {
                 //#endregion
 
                 await env.DB.prepare("INSERT INTO submissions (first_name, last_name, email, phoneNumber, dateOfBirth, cardCount) VALUES (?, ?, ?, ?, ?, ?)")
-                    .bind(firstName.trim(), lastName.trim(), email.trim(), phoneNumber.trim(), dateOfBirth.trim(), Number.parseInt(cardCount.trim()))
+                    .bind(firstName.trim(), lastName.trim(), email.trim(), phoneNumber.trim(), dateOfBirth.trim(), cardCount)
                     .all();
 
                 return Response.redirect(`${env.REDIRECT_URL}?registered=true`);
